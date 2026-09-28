@@ -1,0 +1,2753 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>NØX Perfumes</title>
+
+<style>
+:root{
+  --bg:#101014;
+  --panel:#1d1d22;
+  --gold:#d5bb91;
+  --muted:#aaa39a;
+  --line:#39342d;
+  --green:#25D366;
+  --red:#d85c5c;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  background:var(--bg);
+  color:#f4f0e8;
+  font-family:system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+
+main{
+  max-width:900px;
+  margin:auto;
+  padding:22px 16px 50px;
+}
+
+.head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  border-bottom:1px solid var(--line);
+  padding-bottom:16px;
+}
+
+.logo{
+  font-size:35px;
+  letter-spacing:5px;
+  font-weight:700;
+  cursor:pointer;
+  user-select:none;
+}
+
+.tag{
+  font-size:11px;
+  color:var(--gold);
+  letter-spacing:2px;
+}
+
+h1{
+  font-size:25px;
+  margin:25px 0 4px;
+}
+
+.muted{
+  color:var(--muted);
+  font-size:14px;
+}
+
+.panel{
+  background:var(--panel);
+  padding:18px;
+  border-radius:16px;
+  margin:22px 0;
+}
+
+.form{
+  display:grid;
+  grid-template-columns:2fr 1fr 1fr 1fr auto;
+  gap:10px;
+  align-items:end;
+}
+
+.wide{
+  grid-column:auto;
+}
+
+label{
+  display:block;
+  font-size:13px;
+  color:#d6d0c5;
+  margin-bottom:6px;
+}
+
+input,
+select,
+textarea{
+  width:100%;
+  padding:12px;
+  border-radius:9px;
+  border:1px solid #48433c;
+  background:#111115;
+  color:#fff;
+  font:inherit;
+}
+
+textarea{
+  resize:vertical;
+  min-height:90px;
+}
+
+button{
+  border:0;
+  border-radius:9px;
+  padding:12px 16px;
+  background:var(--gold);
+  color:#171411;
+  font-weight:700;
+  cursor:pointer;
+}
+
+button.secondary{
+  background:#343238;
+  color:#eee;
+}
+
+button.danger{
+  background:#4b2828;
+  color:#ffdede;
+}
+
+button:disabled{
+  opacity:.45;
+  cursor:not-allowed;
+}
+
+.toolbar{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin:16px 0;
+}
+
+.toolbar input{
+  flex:1;
+  min-width:180px;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(190px,1fr));
+  gap:14px;
+}
+
+.card{
+  background:var(--panel);
+  border:1px solid #302e31;
+  border-radius:15px;
+  padding:14px;
+}
+
+.product-image{
+  width:100%;
+  height:210px;
+  object-fit:contain;
+  background:#fff;
+  border-radius:12px;
+  margin-bottom:12px;
+}
+
+.bottle{
+  height:210px;
+  border-radius:11px;
+  background:linear-gradient(145deg,#302d2b,#17171b);
+  display:grid;
+  place-items:center;
+  color:var(--gold);
+  font-size:13px;
+  letter-spacing:2px;
+  margin-bottom:12px;
+}
+
+.name{
+  font-weight:650;
+  font-size:17px;
+}
+
+.meta{
+  color:var(--muted);
+  font-size:13px;
+  margin:5px 0 10px;
+}
+
+.size-selector{
+  display:flex;
+  gap:6px;
+  margin:10px 0;
+  flex-wrap:wrap;
+}
+
+.size-btn{
+  flex:1;
+  padding:7px 10px;
+  border:1px solid #48433c;
+  background:#111115;
+  color:#ccc;
+  border-radius:6px;
+  cursor:pointer;
+  font-size:12px;
+}
+
+.size-btn.active{
+  background:var(--gold);
+  color:#171411;
+}
+
+.price{
+  font-size:24px;
+  color:var(--gold);
+  font-weight:700;
+}
+
+.old-price{
+  color:#777;
+  text-decoration:line-through;
+  margin-left:6px;
+  font-size:15px;
+}
+
+.offer-price{
+  color:#ffce74;
+  font-size:24px;
+  font-weight:800;
+}
+
+.offer-badge{
+  display:inline-block;
+  background:#5b2525;
+  color:#ffd6d6;
+  padding:5px 9px;
+  border-radius:6px;
+  font-size:11px;
+  margin-top:7px;
+}
+
+.offer-countdown{
+  color:#e6cfa6;
+  font-size:11px;
+  margin-top:5px;
+}
+
+.actions{
+  display:flex;
+  gap:8px;
+  margin-top:12px;
+}
+
+.actions button{
+  flex:1;
+}
+
+.status{
+  font-size:13px;
+  margin:8px 0;
+}
+
+.available{
+  color:#75d69b;
+}
+
+.coming{
+  color:#e5bd70;
+}
+
+.unavailable{
+  color:#ff8585;
+}
+
+.cart-drawer{
+  background:#17171c;
+  border:1px solid var(--gold);
+  border-radius:16px;
+  padding:16px;
+  margin:20px 0;
+}
+
+.cart-item{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  border-bottom:1px solid var(--line);
+  padding:10px 0;
+}
+
+.qty-controls{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  margin-top:8px;
+}
+
+.qty-controls button{
+  padding:4px 10px;
+  min-width:30px;
+}
+
+.price-management{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(150px,1fr));
+  gap:12px;
+  margin-top:15px;
+}
+
+.price-box{
+  background:#111115;
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:12px;
+}
+
+.offer-box{
+  background:#111115;
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:14px;
+  margin-top:12px;
+}
+
+#admin-panel{
+  display:none;
+}
+
+.checkout-modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:9999;
+  background:rgba(0,0,0,.82);
+  padding:15px;
+  overflow-y:auto;
+  align-items:center;
+  justify-content:center;
+}
+
+.checkout-modal.active{
+  display:flex;
+}
+
+.checkout-box{
+  background:#1d1d22;
+  border:1px solid var(--gold);
+  border-radius:18px;
+  padding:22px;
+  width:100%;
+  max-width:520px;
+}
+
+.checkout-form{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:13px;
+}
+
+.full{
+  grid-column:1/-1;
+}
+
+.checkout-summary{
+  background:#111115;
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:14px;
+  margin:15px 0;
+}
+
+.checkout-summary-row{
+  display:flex;
+  justify-content:space-between;
+  padding:9px 0;
+  border-bottom:1px solid var(--line);
+  font-size:13px;
+}
+
+.checkout-total{
+  color:var(--gold);
+  font-size:20px;
+  font-weight:bold;
+  margin-top:12px;
+}
+
+.checkout-buttons{
+  display:flex;
+  gap:10px;
+}
+
+.checkout-buttons button{
+  flex:1;
+}
+
+.whatsapp-btn{
+  background:var(--green);
+  color:#102016;
+}
+
+.empty{
+  text-align:center;
+  padding:35px;
+  color:var(--muted);
+  background:var(--panel);
+  border-radius:14px;
+}
+
+.foot{
+  text-align:center;
+  border-top:1px solid var(--line);
+  margin-top:30px;
+  padding-top:20px;
+  color:var(--muted);
+  font-size:12px;
+}
+
+@media(max-width:650px){
+
+  .form{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .wide{
+    grid-column:1/-1;
+  }
+
+  .form button{
+    grid-column:1/-1;
+  }
+
+  .logo{
+    font-size:29px;
+  }
+}
+
+@media(max-width:450px){
+
+  .checkout-form{
+    grid-template-columns:1fr;
+  }
+
+  .full{
+    grid-column:auto;
+  }
+
+  .checkout-buttons{
+    flex-direction:column;
+  }
+
+  .cart-item{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<main>
+
+<header class="head">
+
+<div>
+<div class="logo" id="logo-trigger">NØX</div>
+<div class="tag">
+PERFUMES · YOUR SIGNATURE SCENT
+</div>
+</div>
+
+</header>
+
+<h1>عطورنا وأسعارنا</h1>
+
+<div class="muted">
+كتالوج NØX — اختر الحجم وأضفه للطلب.
+</div>
+
+
+<!-- ================= ADMIN ================= -->
+
+<section id="admin-panel">
+
+<div class="panel">
+
+<div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap">
+
+<h3 style="color:var(--gold)">
+أسعار الأحجام
+</h3>
+
+<div>
+
+<button
+class="secondary"
+onclick="changePassword()">
+🔑 تغيير كلمة السر
+</button>
+
+<button
+class="secondary"
+onclick="closeAdmin()">
+إغلاق
+</button>
+
+</div>
+
+</div>
+
+<div class="muted">
+غيّر الأسعار وسيتم استخدامها لجميع العطور.
+</div>
+
+<div
+id="pricing-list"
+class="price-management">
+</div>
+
+<div style="margin-top:15px">
+
+<button onclick="savePrices()">
+حفظ الأسعار
+</button>
+
+<button
+class="secondary"
+onclick="addSize()">
+＋ إضافة حجم
+</button>
+
+</div>
+
+</div>
+
+
+<!-- ================= OFFERS ================= -->
+
+<div class="panel">
+
+<h3 style="color:var(--gold)">
+🔥 العروض المؤقتة
+</h3>
+
+<div class="muted">
+العرض ينتهي تلقائياً حسب التاريخ والو��ت الذي تحدده.
+</div>
+
+
+<div class="form" style="margin-top:15px">
+
+<div>
+<label>العطر</label>
+
+<select id="offer-product"></select>
+</div>
+
+
+<div>
+<label>الحجم</label>
+
+<select id="offer-size"></select>
+</div>
+
+
+<div>
+<label>سعر العرض $</label>
+
+<input
+id="offer-price"
+type="number"
+step="0.01"
+min="0"
+placeholder="مثلاً 8">
+</div>
+
+
+<div>
+<label>يبدأ</label>
+
+<input
+id="offer-start"
+type="datetime-local">
+</div>
+
+
+<div>
+<label>ينتهي</label>
+
+<input
+id="offer-end"
+type="datetime-local">
+</div>
+
+</div>
+
+
+<div style="margin-top:12px">
+
+<label>اسم العرض</label>
+
+<input
+id="offer-name"
+placeholder="مثلاً عرض العودة إلى المدارس">
+
+</div>
+
+
+<div style="margin-top:12px">
+
+<button onclick="createOffer()">
+＋ إنشاء العرض
+</button>
+
+</div>
+
+
+<div id="offers-list"></div>
+
+</div>
+
+
+<!-- ================= PRODUCTS ================= -->
+
+<div class="panel">
+
+<h3 style="color:var(--gold)">
+إضافة / تعديل عطر
+</h3>
+
+<form id="product-form">
+
+<div class="form">
+
+<div class="wide">
+
+<label>اسم العطر</label>
+
+<input
+id="product-name"
+required
+placeholder="مثلاً Dior Sauvage">
+
+</div>
+
+
+<div>
+
+<label>التصنيف</label>
+
+<select id="product-category">
+
+<option>رجالي</option>
+<option>نسائي</option>
+<option>للجنسين</option>
+
+</select>
+
+</div>
+
+
+<div>
+
+<label>الحالة</label>
+
+<select id="product-status">
+
+<option value="available">
+متوفر
+</option>
+
+<option value="coming">
+قريباً
+</option>
+
+<option value="unavailable">
+غير متوفر
+</option>
+
+</select>
+
+</div>
+
+
+<div class="wide">
+
+<label>ملاحظة</label>
+
+<input
+id="product-note"
+placeholder="مثلاً متوفر لفترة محدودة">
+
+</div>
+
+
+<div class="wide">
+
+<label>صورة العطر</label>
+
+<input
+id="product-image"
+type="file"
+accept="image/*">
+
+</div>
+
+
+<button type="submit">
+إضافة العطر
+</button>
+
+</div>
+
+</form>
+
+
+<div style="margin-top:15px">
+
+<button
+class="secondary"
+onclick="exportBackup()">
+تصدير نسخة احتياطية
+</button>
+
+<button
+class="secondary"
+onclick="document.getElementById('import-file').click()">
+استيراد نسخة
+</button>
+
+<input
+id="import-file"
+type="file"
+accept=".json"
+style="display:none">
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= SEARCH ================= -->
+
+<div class="toolbar">
+
+<input
+id="search"
+placeholder="ابحث عن عطر...">
+
+<select id="filter">
+
+<option>الكل</option>
+<option>رجالي</option>
+<option>نسائي</option>
+<option>للجنسين</option>
+
+</select>
+
+</div>
+
+
+<div
+id="count"
+class="muted">
+</div>
+
+
+<!-- ================= PRODUCTS ================= -->
+
+<section
+id="products"
+class="grid">
+</section>
+
+
+<!-- ================= CART ================= -->
+
+<section class="cart-drawer">
+
+<h3 style="color:var(--gold)">
+🛍️ سلة الطلب
+</h3>
+
+<div id="cart-items">
+
+<div class="muted">
+السلة فارغة حالياً
+</div>
+
+</div>
+
+
+<div
+id="cart-total"
+style="
+margin-top:15px;
+text-align:left;
+font-size:19px;
+font-weight:bold;
+color:var(--gold)">
+الإجمالي: $0.00
+</div>
+
+
+<button
+id="checkout-btn"
+class="whatsapp-btn"
+style="
+width:100%;
+margin-top:15px;
+font-size:16px"
+disabled>
+
+إتمام الطلب عبر WhatsApp ↗
+
+</button>
+
+</section>
+
+
+<div class="foot">
+
+<div
+style="
+color:var(--gold);
+font-size:20px;
+letter-spacing:4px">
+NØX
+</div>
+
+YOUR SCENT. YOUR IDENTITY.
+
+</div>
+
+</main>
+
+
+<!-- ================= CHECKOUT ================= -->
+
+<div
+id="checkout-modal"
+class="checkout-modal">
+
+<div class="checkout-box">
+
+<h2 style="color:var(--gold)">
+إتمام طلبك من NØX
+</h2>
+
+<p class="muted">
+أدخل معلوماتك لإرسال الطلب عبر WhatsApp.
+</p>
+
+
+<form id="checkout-form">
+
+<div class="checkout-form">
+
+
+<div>
+
+<label>
+الاسم الكامل *
+</label>
+
+<input
+id="customer-name"
+required
+placeholder="اسمك الكامل">
+
+</div>
+
+
+<div>
+
+<label>
+رقم الهاتف *
+</label>
+
+<input
+id="customer-phone"
+type="tel"
+required
+placeholder="70 000 000">
+
+</div>
+
+
+<div class="full">
+
+<label>
+عنوان التوصيل *
+</label>
+
+<input
+id="customer-address"
+required
+placeholder="المنطقة، الشارع، المبنى...">
+
+</div>
+
+
+<div class="full">
+
+<label>
+ملاحظات
+</label>
+
+<textarea
+id="customer-notes"
+placeholder="أي ملاحظات إضافية...">
+</textarea>
+
+</div>
+
+
+</div>
+
+
+<div class="checkout-summary">
+
+<h3 style="color:var(--gold)">
+ملخص الطلب
+</h3>
+
+<div id="checkout-items">
+</div>
+
+<div
+id="checkout-total"
+class="checkout-total">
+الإجمالي: $0.00
+</div>
+
+</div>
+
+
+<div class="checkout-buttons">
+
+<button
+type="submit"
+class="whatsapp-btn">
+إرسال الطلب عبر WhatsApp
+</button>
+
+<button
+type="button"
+class="secondary"
+id="close-checkout">
+رجوع
+</button>
+
+</div>
+
+</form>
+
+</div>
+
+</div>
+
+
+<script>
+
+/* =========================================================
+   NØX PERFUMES
+   ========================================================= */
+
+const STORAGE_PRODUCTS =
+"NOX_PRODUCTS";
+
+const STORAGE_PRICES =
+"NOX_PRICES";
+
+const STORAGE_OFFERS =
+"NOX_OFFERS";
+
+const STORAGE_PASSWORD =
+"NOX_ADMIN_PASSWORD";
+
+
+const WHATSAPP_NUMBER =
+"96179190165";
+
+
+/* ================= DEFAULT PRICES ================= */
+
+let prices = {
+
+"5":0.83,
+"30":7,
+"50":10,
+"100":15
+
+};
+
+
+/* ================= PRODUCTS ================= */
+
+const defaultProducts = [
+
+{
+id:"m1",
+name:"Dior Sauvage",
+category:"رجالي",
+image:""
+},
+
+{
+id:"m2",
+name:"Bleu de Chanel",
+category:"رجالي",
+image:""
+},
+
+{
+id:"m3",
+name:"Yves Saint Laurent Y",
+category:"رجالي",
+image:""
+},
+
+{
+id:"m4",
+name:"Paco Rabanne Invictus",
+category:"رجالي",
+image:""
+},
+
+{
+id:"m5",
+name:"Jean Paul Gaultier Le Male",
+category:"رجالي",
+image:""
+},
+
+{
+id:"m6",
+name:"Lacoste Blanc",
+category:"رجالي",
+image:""
+},
+
+{
+id:"m7",
+name:"Narciso Rodriguez Bleu Noir",
+category:"رجالي",
+image:""
+},
+
+{
+id:"m8",
+name:"Carolina Herrera 212 VIP Men",
+category:"رجالي",
+image:""
+},
+
+{
+id:"m9",
+name:"Guerlain Oud",
+category:"رجالي",
+image:""
+},
+
+{
+id:"m10",
+name:"Emporio Armani Because It's You",
+category:"رجالي",
+image:""
+},
+
+{
+id:"m11",
+name:"The One",
+category:"رجالي",
+image:""
+},
+
+{
+id:"m12",
+name:"Acqua di Gio",
+category:"رجالي",
+image:""
+},
+
+{
+id:"m13",
+name:"Khamrah",
+category:"رجالي",
+image:""
+},
+
+{
+id:"m14",
+name:"Tom Ford Ombre Leather",
+category:"رجالي",
+image:""
+},
+
+{
+id:"m15",
+name:"Dior Sauvage Extra",
+category:"رجالي",
+image:""
+},
+
+{
+id:"m16",
+name:"Dunhill Desire",
+category:"رجالي",
+image:""
+},
+
+{
+id:"m17",
+name:"Stronger With You",
+category:"رجالي",
+image:""
+},
+
+{
+id:"m18",
+name:"Creed Aventus Extra",
+category:"رجالي",
+image:""
+},
+
+
+{
+id:"w1",
+name:"Baccarat Rouge 540",
+category:"للجنسين",
+image:""
+},
+
+{
+id:"w2",
+name:"YSL Black Opium",
+category:"نسائي",
+image:""
+},
+
+{
+id:"w3",
+name:"YSL Libre Intense",
+category:"نسائي",
+image:""
+},
+
+{
+id:"w4",
+name:"La Vie Est Belle",
+category:"نسائي",
+image:""
+},
+
+{
+id:"w5",
+name:"Dior J'adore",
+category:"نسائي",
+image:""
+},
+
+{
+id:"w6",
+name:"Giorgio Armani Sì",
+category:"نسائي",
+image:""
+},
+
+{
+id:"w7",
+name:"Burberry Her",
+category:"نسائي",
+image:""
+},
+
+{
+id:"w8",
+name:"Mancera Roses Vanille",
+category:"نسائي",
+image:""
+},
+
+{
+id:"w9",
+name:"Coco Vanille Mancera",
+category:"نسائي",
+image:""
+},
+
+{
+id:"w10",
+name:"Miss Dior Chérie",
+category:"نسائي",
+image:""
+},
+
+{
+id:"w11",
+name:"Prada Paradoxe",
+category:"نسائي",
+image:""
+},
+
+{
+id:"w12",
+name:"Good Girl",
+category:"نسائي",
+image:""
+},
+
+{
+id:"w13",
+name:"Vanilla",
+category:"نسائي",
+image:""
+},
+
+{
+id:"w14",
+name:"Ana Al Shouq",
+category:"نسائي",
+image:""
+},
+
+{
+id:"w15",
+name:"Coco Mademoiselle Super",
+category:"نسائي",
+image:""
+},
+
+{
+id:"w16",
+name:"Vibrato Sospiro",
+category:"نسائي",
+image:""
+}
+
+];
+
+
+/* ================= STATE ================= */
+
+let products =
+JSON.parse(
+localStorage.getItem(STORAGE_PRODUCTS)
+) || defaultProducts;
+
+let offers =
+JSON.parse(
+localStorage.getItem(STORAGE_OFFERS)
+) || [];
+
+const savedPrices =
+JSON.parse(
+localStorage.getItem(STORAGE_PRICES)
+);
+
+if(savedPrices){
+prices=savedPrices;
+}
+
+let adminPassword =
+localStorage.getItem(STORAGE_PASSWORD)
+|| "1234";
+
+let cart=[];
+
+let selectedSizes={};
+
+let editingProduct=null;
+
+
+/* ================= HELPERS ================= */
+
+function saveAll(){
+
+localStorage.setItem(
+STORAGE_PRODUCTS,
+JSON.stringify(products)
+);
+
+localStorage.setItem(
+STORAGE_PRICES,
+JSON.stringify(prices)
+);
+
+localStorage.setItem(
+STORAGE_OFFERS,
+JSON.stringify(offers)
+);
+
+}
+
+
+function esc(text){
+
+return String(text ?? "")
+.replace(/[&<>"']/g,function(c){
+
+return {
+
+"&":"&amp;",
+"<":"&lt;",
+">":"&gt;",
+'"':"&quot;",
+"'":"&#39;"
+
+}[c];
+
+});
+
+}
+
+
+function sizes(){
+
+return Object.keys(prices)
+.sort(
+(a,b)=>Number(a)-Number(b)
+);
+
+}
+
+
+function getPrice(size){
+
+return Number(prices[size] || 0);
+
+}
+
+
+/* ================= OFFERS ================= */
+
+function activeOffer(productId,size){
+
+const now=new Date();
+
+const found=offers.find(offer=>{
+
+return (
+
+offer.productId===productId &&
+
+String(offer.size)===String(size) &&
+
+offer.active===true &&
+
+new Date(offer.start)<=now &&
+
+new Date(offer.end)>=now
+
+);
+
+});
+
+return found || null;
+
+}
+
+
+function offerFor(productId,size){
+
+return activeOffer(
+productId,
+size
+);
+
+}
+
+
+function createOffer(){
+
+const productId =
+document.getElementById(
+"offer-product"
+).value;
+
+const size =
+document.getElementById(
+"offer-size"
+).value;
+
+const price =
+Number(
+document.getElementById(
+"offer-price"
+).value
+);
+
+const start =
+document.getElementById(
+"offer-start"
+).value;
+
+const end =
+document.getElementById(
+"offer-end"
+).value;
+
+const name =
+document.getElementById(
+"offer-name"
+).value.trim();
+
+
+if(!productId || !size){
+
+alert("اختر العطر والحجم.");
+
+return;
+
+}
+
+
+if(!price || price<0){
+
+alert("أدخل سعر عرض صحيح.");
+
+return;
+
+}
+
+
+if(!start || !end){
+
+alert("حدد بداية ونهاية العرض.");
+
+return;
+
+}
+
+
+if(new Date(end)<=new Date(start)){
+
+alert(
+"وقت انتهاء العرض يجب أن يكون بعد وقت البداية."
+);
+
+return;
+
+}
+
+
+offers.push({
+
+id:Date.now(),
+
+productId,
+
+size,
+
+price,
+
+name:name || "عرض خاص",
+
+start,
+
+end,
+
+active:true
+
+});
+
+
+saveAll();
+
+renderOffers();
+
+renderProducts();
+
+alert("تم إنشاء العرض.");
+
+}
+
+
+function deleteOffer(id){
+
+if(!confirm("حذف هذا العرض؟")){
+
+return;
+
+}
+
+offers =
+offers.filter(
+offer=>offer.id!==id
+);
+
+saveAll();
+
+renderOffers();
+
+renderProducts();
+
+}
+
+
+function toggleOffer(id){
+
+const offer =
+offers.find(
+x=>x.id===id
+);
+
+if(!offer)return;
+
+offer.active=!offer.active;
+
+saveAll();
+
+renderOffers();
+
+renderProducts();
+
+}
+
+
+function renderOffers(){
+
+const box =
+document.getElementById(
+"offers-list"
+);
+
+if(!offers.length){
+
+box.innerHTML=
+`<div class="muted" style="margin-top:15px">
+لا توجد عروض حالياً.
+</div>`;
+
+return;
+
+}
+
+
+box.innerHTML =
+offers.map(offer=>{
+
+const product =
+products.find(
+p=>p.id===offer.productId
+);
+
+const now=new Date();
+
+let status="غير فعال";
+
+if(
+offer.active &&
+new Date(offer.start)<=now &&
+new Date(offer.end)>=now
+){
+
+status="🔥 فعال الآن";
+
+}
+
+return `
+
+<div class="offer-box">
+
+<strong>
+${esc(product?.name || "عطر محذوف")}
+</strong>
+
+<div class="muted">
+${offer.size} ML
+</div>
+
+<div style="margin-top:5px">
+
+${esc(offer.name)}
+
+</div>
+
+<div style="color:var(--gold);margin-top:5px">
+
+$${Number(offer.price).toFixed(2)}
+
+</div>
+
+<div class="muted">
+
+من:
+${new Date(offer.start).toLocaleString()}
+
+<br>
+
+إلى:
+${new Date(offer.end).toLocaleString()}
+
+</div>
+
+<div style="margin-top:8px">
+
+<strong>${status}</strong>
+
+</div>
+
+<div style="display:flex;gap:7px;margin-top:10px">
+
+<button
+class="secondary"
+onclick="toggleOffer(${offer.id})">
+
+${offer.active?"إيقاف":"تفعيل"}
+
+</button>
+
+<button
+class="danger"
+onclick="deleteOffer(${offer.id})">
+
+حذف
+
+</button>
+
+</div>
+
+</div>
+
+`;
+
+}).join("");
+
+}
+
+
+/* ================= PRODUCT ADMIN ================= */
+
+function updateOfferProductSelect(){
+
+const select =
+document.getElementById(
+"offer-product"
+);
+
+select.innerHTML =
+products.map(p=>`
+
+<option value="${p.id}">
+${esc(p.name)}
+</option>
+
+`).join("");
+
+}
+
+
+function updateOfferSizeSelect(){
+
+const select =
+document.getElementById(
+"offer-size"
+);
+
+select.innerHTML =
+sizes().map(size=>`
+
+<option value="${size}">
+${size} ML
+</option>
+
+`).join("");
+
+}
+
+
+document
+.getElementById("product-form")
+.addEventListener(
+"submit",
+function(e){
+
+e.preventDefault();
+
+const name =
+document.getElementById(
+"product-name"
+).value.trim();
+
+const category =
+document.getElementById(
+"product-category"
+).value;
+
+const status =
+document.getElementById(
+"product-status"
+).value;
+
+const note =
+document.getElementById(
+"product-note"
+).value.trim();
+
+const file =
+document.getElementById(
+"product-image"
+).files[0];
+
+
+if(!name){
+
+alert("أدخل اسم العطر.");
+
+return;
+
+}
+
+
+const saveProduct =
+(image)=>{
+
+if(editingProduct){
+
+const product =
+products.find(
+p=>p.id===editingProduct
+);
+
+product.name=name;
+
+product.category=category;
+
+product.status=status;
+
+product.note=note;
+
+if(image){
+product.image=image;
+}
+
+}else{
+
+products.push({
+
+id:"p_"+Date.now(),
+
+name,
+
+category,
+
+status,
+
+note,
+
+image:image || ""
+
+});
+
+}
+
+
+saveAll();
+
+editingProduct=null;
+
+this.reset();
+
+renderProducts();
+
+updateOfferProductSelect();
+
+alert("تم حفظ العطر.");
+
+};
+
+
+if(file){
+
+const reader=
+new FileReader();
+
+reader.onload=(e)=>{
+
+saveProduct(
+e.target.result
+);
+
+};
+
+reader.readAsDataURL(file);
+
+}else{
+
+saveProduct("");
+
+}
+
+}
+);
+
+
+function renderPricing(){
+
+const box =
+document.getElementById(
+"pricing-list"
+);
+
+box.innerHTML =
+sizes().map(size=>{
+
+return `
+
+<div class="price-box">
+
+<label>
+${size} ML
+</label>
+
+<input
+type="number"
+step="0.01"
+min="0"
+data-size="${size}"
+value="${getPrice(size)}"
+style="margin-top:8px">
+
+</div>
+
+`;
+
+}).join("");
+
+}
+
+
+function savePrices(){
+
+sizes().forEach(size=>{
+
+const input =
+document.querySelector(
+`input[data-size="${size}"]`
+);
+
+if(input){
+
+prices[size]=
+Number(input.value);
+
+}
+
+});
+
+
+saveAll();
+
+renderProducts();
+
+alert("تم حفظ الأسعار.");
+
+}
+
+
+function addSize(){
+
+const size =
+prompt("أدخل الحجم بـ ML:");
+
+if(!size)return;
+
+const sizeNum=Number(size);
+
+if(isNaN(sizeNum) || sizeNum<=0){
+
+alert("أدخل رقم صحيح.");
+
+return;
+
+}
+
+const price =
+prompt("أدخل سعر هذا الحجم:");
+
+if(!price)return;
+
+const priceNum=Number(price);
+
+if(isNaN(priceNum) || priceNum<0){
+
+alert("أدخل سعر صحيح.");
+
+return;
+
+}
+
+
+prices[String(size)]=priceNum;
+
+saveAll();
+
+renderPricing();
+
+updateOfferSizeSelect();
+
+renderProducts();
+
+}
+
+
+function exportBackup(){
+
+const backup={
+
+products,
+
+prices,
+
+offers
+
+};
+
+
+const json=
+JSON.stringify(backup,null,2);
+
+const blob=
+new Blob(
+[json],
+{type:"application/json"}
+);
+
+const url=
+URL.createObjectURL(blob);
+
+const a=document.createElement("a");
+
+a.href=url;
+
+a.download=
+"nox-backup-"+
+new Date().toISOString()
+.split("T")[0]+".json";
+
+a.click();
+
+}
+
+
+function openImportDialog(){
+
+document.getElementById(
+"import-file"
+).click();
+
+}
+
+
+document.getElementById(
+"import-file"
+).addEventListener(
+"change",
+function(e){
+
+const file=e.target.files[0];
+
+if(!file)return;
+
+const reader=
+new FileReader();
+
+reader.onload=(event)=>{
+
+try{
+
+const backup=
+JSON.parse(
+event.target.result
+);
+
+if(
+!backup.products ||
+!backup.prices ||
+!backup.offers
+){
+
+throw new Error(
+"ملف غير صالح."
+);
+
+}
+
+
+if(
+!confirm(
+"استيراد النسخة الاحتياطية يستبدل جميع البيانات. هل أنت متأكد؟"
+)
+){
+
+return;
+
+}
+
+
+products=backup.products;
+
+prices=backup.prices;
+
+offers=backup.offers;
+
+saveAll();
+
+renderProducts();
+
+renderPricing();
+
+renderOffers();
+
+updateOfferProductSelect();
+
+updateOfferSizeSelect();
+
+alert("تم استيراد النسخة.");
+
+}catch(err){
+
+alert("خطأ: "+err.message);
+
+}
+
+};
+
+reader.readAsText(file);
+
+}
+);
+
+
+/* ================= PRODUCTS RENDERING ================= */
+
+function renderProducts(){
+
+const search =
+document.getElementById(
+"search"
+).value.toLowerCase();
+
+const filter =
+document.getElementById(
+"filter"
+).value;
+
+let filtered=products;
+
+if(search){
+
+filtered=filtered.filter(p=>{
+
+return (
+p.name.toLowerCase().includes(search)
+);
+
+});
+
+}
+
+if(filter!=="الكل"){
+
+filtered=filtered.filter(p=>{
+
+return p.category===filter;
+
+});
+
+}
+
+
+const box =
+document.getElementById("products");
+
+if(!filtered.length){
+
+box.innerHTML=
+`<div class="empty">
+لا توجد عطور تطابق بحثك.
+</div>`;
+
+document.getElementById(
+"count"
+).innerHTML="";
+
+return;
+
+}
+
+
+box.innerHTML=
+filtered.map(product=>{
+
+const sizes_ =sizes();
+
+const sizeButtons=
+sizes_.map(size=>{
+
+const offer =
+activeOffer(
+product.id,
+size
+);
+
+return `
+
+<button
+type="button"
+class="size-btn ${selectedSizes[product.id]===size?"active":""}"
+onclick="selectSize('${product.id}','${size}')">
+
+${size} ML
+
+</button>
+
+`;
+
+}).join("");
+
+
+const selectedSize=
+selectedSizes[product.id] ||
+sizes_[0];
+
+const offer=
+activeOffer(
+product.id,
+selectedSize
+);
+
+let priceHtml="";
+
+if(offer){
+
+priceHtml=`
+
+<div>
+
+<span class="old-price">
+$${getPrice(selectedSize).toFixed(2)}
+</span>
+
+<span class="offer-price">
+$${offer.price.toFixed(2)}
+</span>
+
+</div>
+
+<div class="offer-badge">
+${esc(offer.name)}
+</div>
+
+`;
+
+}else{
+
+priceHtml=`
+
+<div class="price">
+$${getPrice(selectedSize).toFixed(2)}
+</div>
+
+`;
+
+}
+
+
+let statusClass="available";
+
+let statusText="متوفر";
+
+if(product.status==="coming"){
+
+statusClass="coming";
+
+statusText="قريباً";
+
+}else if(product.status==="unavailable"){
+
+statusClass="unavailable";
+
+statusText="غير متوفر";
+
+}
+
+
+return `
+
+<div class="card">
+
+${product.image ? `<img src="${product.image}" class="product-image">` : `<div class="bottle">${product.category}</div>`}
+
+<div class="name">
+${esc(product.name)}
+</div>
+
+<div class="meta">
+${esc(product.category)} · ${product.note||""}
+</div>
+
+<div class="status ${statusClass}">
+● ${statusText}
+</div>
+
+<div class="size-selector">
+${sizeButtons}
+</div>
+
+${priceHtml}
+
+<div class="actions">
+
+<button
+type="button"
+onclick="addToCart('${product.id}','${selectedSize}')">
+
+أضف للطلب
+
+</button>
+
+</div>
+
+</div>
+
+`;
+
+}).join("");
+
+
+document.getElementById("count")
+.innerHTML=
+`يوجد ${filtered.length} عطر`;
+
+}
+
+
+function selectSize(productId,size){
+
+selectedSizes[productId]=size;
+
+renderProducts();
+
+}
+
+
+/* ================= CART ================= */
+
+function addToCart(productId,size){
+
+const product=
+products.find(
+p=>p.id===productId
+);
+
+if(!product)return;
+
+const item=
+cart.find(i=>
+i.productId===productId &&
+i.size===size
+);
+
+if(item){
+
+item.qty++;
+
+}else{
+
+cart.push({
+
+productId,
+
+size,
+
+qty:1
+
+});
+
+}
+
+
+renderCart();
+
+alert(`${product.name} تم إضافته للطلب`);
+
+}
+
+
+function removeFromCart(index){
+
+cart.splice(index,1);
+
+renderCart();
+
+}
+
+
+function updateQty(index,delta){
+
+cart[index].qty+=delta;
+
+if(cart[index].qty<1){
+
+removeFromCart(index);
+
+}else{
+
+renderCart();
+
+}
+
+}
+
+
+function renderCart(){
+
+const box =
+document.getElementById("cart-items");
+
+if(!cart.length){
+
+box.innerHTML=
+`<div class="muted">
+السلة فارغة حالياً
+</div>`;
+
+document.getElementById(
+"checkout-btn"
+).disabled=true;
+
+document.getElementById(
+"cart-total"
+).innerHTML=
+`الإجمالي: $0.00`;
+
+return;
+
+}
+
+
+let total=0;
+
+box.innerHTML=
+cart.map((item,idx)=>{
+
+const product=
+products.find(
+p=>p.id===item.productId
+);
+
+let price=getPrice(item.size);
+
+const offer=
+activeOffer(
+item.productId,
+item.size
+);
+
+if(offer){
+
+price=offer.price;
+
+}
+
+const subtotal=price*item.qty;
+
+total+=subtotal;
+
+return `
+
+<div class="cart-item">
+
+<div>
+
+<strong>
+${esc(product?.name || "عطر محذوف")}
+</strong>
+
+<div class="muted">
+${item.size} ML
+</div>
+
+</div>
+
+<div style="text-align:left">
+
+<div>
+$${subtotal.toFixed(2)}
+</div>
+
+<div class="qty-controls">
+
+<button
+onclick="updateQty(${idx},-1)">
+−
+</button>
+
+<span>
+${item.qty}
+</span>
+
+<button
+onclick="updateQty(${idx},1)">
++
+</button>
+
+<button
+class="secondary"
+onclick="removeFromCart(${idx})">
+حذف
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+`;
+
+}).join("");
+
+
+document.getElementById("cart-total")
+.innerHTML=
+`الإجمالي: $${total.toFixed(2)}`;
+
+document.getElementById(
+"checkout-btn"
+).disabled=false;
+
+}
+
+
+document.getElementById(
+"checkout-btn"
+).addEventListener(
+"click",
+()=>{
+
+document.getElementById(
+"checkout-modal"
+).classList.add("active");
+
+updateCheckoutSummary();
+
+}
+);
+
+
+document.getElementById(
+"close-checkout"
+).addEventListener(
+"click",
+()=>{
+
+document.getElementById(
+"checkout-modal"
+).classList.remove("active");
+
+}
+);
+
+
+function updateCheckoutSummary(){
+
+const itemsBox =
+document.getElementById(
+"checkout-items"
+);
+
+let total=0;
+
+itemsBox.innerHTML=
+cart.map(item=>{
+
+const product=
+products.find(
+p=>p.id===item.productId
+);
+
+let price=getPrice(item.size);
+
+const offer=
+activeOffer(
+item.productId,
+item.size
+);
+
+if(offer){
+
+price=offer.price;
+
+}
+
+const subtotal=price*item.qty;
+
+total+=subtotal;
+
+return `
+
+<div class="checkout-summary-row">
+
+<span>
+${esc(product?.name || "عطر محذوف")} × ${item.qty} (${item.size}ML)
+</span>
+
+<span>
+$${subtotal.toFixed(2)}
+</span>
+
+</div>
+
+`;
+
+}).join("");
+
+
+itemsBox.innerHTML+=
+`<div class="checkout-summary-row" style="font-weight:bold;color:var(--gold)">
+
+<span>
+الإجمالي
+</span>
+
+<span>
+$${total.toFixed(2)}
+</span>
+
+</div>`;
+
+
+document.getElementById(
+"checkout-total"
+).innerHTML=
+`الإجمالي: $${total.toFixed(2)}`;
+
+}
+
+
+document.getElementById(
+"checkout-form"
+).addEventListener(
+"submit",
+function(e){
+
+e.preventDefault();
+
+const name =
+document.getElementById(
+"customer-name"
+).value.trim();
+
+const phone =
+document.getElementById(
+"customer-phone"
+).value.trim();
+
+const address =
+document.getElementById(
+"customer-address"
+).value.trim();
+
+const notes =
+document.getElementById(
+"customer-notes"
+).value.trim();
+
+
+if(!name || !phone || !address){
+
+alert("الرجاء ملء جميع الحقول المطلوبة.");
+
+return;
+
+}
+
+
+let total=0;
+
+let message=
+`*طلب جديد من NØX*\n\n`;
+
+message+=`📋 *الزبون:* ${name}\n`;
+
+message+=`📞 *الهاتف:* ${phone}\n`;
+
+message+=`📍 *العنوان:* ${address}\n\n`;
+
+message+=`*📦 الطلب:*\n`;
+
+cart.forEach(item=>{
+
+const product=
+products.find(
+p=>p.id===item.productId
+);
+
+let price=getPrice(item.size);
+
+const offer=
+activeOffer(
+item.productId,
+item.size
+);
+
+if(offer){
+
+price=offer.price;
+
+}
+
+const subtotal=price*item.qty;
+
+total+=subtotal;
+
+message+=
+`• ${product?.name || "عطر محذوف"} - ${item.size}ML × ${item.qty} = $${subtotal.toFixed(2)}\n`;
+
+});
+
+
+message+=`\n*💰 الإجمالي:* $${total.toFixed(2)}\n`;
+
+
+if(notes){
+
+message+=`\n*📝 ملاحظات:* ${notes}\n`;
+
+}
+
+
+const waUrl=
+`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+
+window.open(waUrl,"_blank");
+
+cart=[];
+
+renderCart();
+
+this.reset();
+
+document.getElementById(
+"checkout-modal"
+).classList.remove("active");
+
+}
+);
+
+
+/* ================= SEARCH & FILTER ================= */
+
+document.getElementById("search")
+.addEventListener("input",renderProducts);
+
+document.getElementById("filter")
+.addEventListener("change",renderProducts);
+
+
+/* ================= ADMIN ================= */
+
+document.getElementById("logo-trigger")
+.addEventListener("click",()=>{
+
+const pwd=prompt("كلمة السر:");
+
+if(pwd===adminPassword){
+
+document.getElementById(
+"admin-panel"
+).style.display="block";
+
+renderPricing();
+
+renderOffers();
+
+updateOfferProductSelect();
+
+updateOfferSizeSelect();
+
+}else{
+
+alert("كلمة السر غير صحيحة.");
+
+}
+
+});
+
+
+function closeAdmin(){
+
+document.getElementById(
+"admin-panel"
+).style.display="none";
+
+}
+
+
+function changePassword(){
+
+const current=
+prompt("كلمة السر الحالية:");
+
+if(current!==adminPassword){
+
+alert("كلمة السر غير صحيحة.");
+
+return;
+
+}
+
+const newPwd=
+prompt("كلمة السر الجديدة:");
+
+if(!newPwd || newPwd.length<3){
+
+alert("كلمة السر يجب أن تكون 3 أحرف أو أكثر.");
+
+return;
+
+}
+
+adminPassword=newPwd;
+
+localStorage.setItem(
+STORAGE_PASSWORD,
+adminPassword
+);
+
+alert("تم تحديث كلمة السر.");
+
+}
+
+
+/* ================= INIT ================= */
+
+renderProducts();
+
+renderCart();
+
+</script>
+
+</body>
+</html>
